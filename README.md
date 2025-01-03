@@ -1,1 +1,0 @@
-# alpha-ecosystem-bank-app-testtask
