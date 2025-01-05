@@ -1,6 +1,6 @@
 package com.listener.bankapp.di.app
 
-import com.listener.bankapp.data.BinApi
+import com.listener.bankapp.data.remote.retrofit.BinApi
 import com.listener.bankapp.utils.Constants
 import dagger.Module
 import dagger.Provides

@@ -1,7 +1,7 @@
 package com.listener.bankapp
 
 import android.app.Application
-import com.listener.bankapp.di.DaggerAppComponent
+import com.listener.bankapp.di.app.DaggerAppComponent
 
 class App: Application() {
 

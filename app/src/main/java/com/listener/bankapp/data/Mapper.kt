@@ -1,9 +1,9 @@
 package com.listener.bankapp.data
 
-import com.listener.bankapp.data.dto.BankCardDTO
-import com.listener.bankapp.data.dto.BankDTO
-import com.listener.bankapp.data.dto.CountryDTO
-import com.listener.bankapp.data.dto.NumberDTO
+import com.listener.bankapp.data.remote.dto.BankCardDTO
+import com.listener.bankapp.data.remote.dto.BankDTO
+import com.listener.bankapp.data.remote.dto.CountryDTO
+import com.listener.bankapp.data.remote.dto.NumberDTO
 import com.listener.bankapp.domain.models.Bank
 import com.listener.bankapp.domain.models.BankCard
 import com.listener.bankapp.domain.models.Country

@@ -1,4 +1,4 @@
-package com.listener.bankapp.data.dto
+package com.listener.bankapp.data.remote.dto
 
 data class BankCardDTO(
     val number: NumberDTO,

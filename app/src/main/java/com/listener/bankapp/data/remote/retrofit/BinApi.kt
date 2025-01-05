@@ -1,6 +1,6 @@
-package com.listener.bankapp.data
+package com.listener.bankapp.data.remote.retrofit
 
-import com.listener.bankapp.data.dto.BankCardDTO
+import com.listener.bankapp.data.remote.dto.BankCardDTO
 import retrofit2.http.GET
 import retrofit2.http.Path
 
