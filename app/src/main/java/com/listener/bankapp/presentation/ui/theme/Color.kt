@@ -1,4 +1,4 @@
-package com.listener.bankapp.ui.theme
+package com.listener.bankapp.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
