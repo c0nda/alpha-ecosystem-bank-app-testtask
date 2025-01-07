@@ -6,7 +6,6 @@ import com.listener.bankapp.data.repository.BankCardRepositoryImpl
 import com.listener.bankapp.domain.repository.BankCardRepository
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 
 @Module
 abstract class RepositoryModule {
