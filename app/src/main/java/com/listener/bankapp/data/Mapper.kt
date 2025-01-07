@@ -10,12 +10,13 @@ import com.listener.bankapp.domain.models.Country
 import com.listener.bankapp.domain.models.Number
 
 fun BankCardDTO.toDomain() = BankCard(
-    number = number.toDomain(),
+    number = number?.toDomain(),
     scheme = scheme,
     type = type,
     brand = brand,
     prepaid = prepaid,
-    bank = bank.toDomain()
+    country = country?.toDomain(),
+    bank = bank?.toDomain()
 )
 
 fun NumberDTO.toDomain() = Number(
