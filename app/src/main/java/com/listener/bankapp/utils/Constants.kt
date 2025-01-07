@@ -2,5 +2,5 @@ package com.listener.bankapp.utils
 
 object Constants {
 
-    const val BASE_URL = "https://binlist.net/"
+    const val BASE_URL = "https://lookup.binlist.net/"
 }
