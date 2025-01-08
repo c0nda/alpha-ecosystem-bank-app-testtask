@@ -1,5 +1,7 @@
 package com.listener.bankapp.di.app
 
+import com.listener.bankapp.data.local.LocalDataSource
+import com.listener.bankapp.data.local.room.RoomStorage
 import com.listener.bankapp.data.remote.RemoteDataSource
 import com.listener.bankapp.data.remote.retrofit.RetrofitStorage
 import com.listener.bankapp.data.repository.BankCardRepositoryImpl
@@ -19,4 +21,9 @@ abstract class RepositoryModule {
     abstract fun bindRemoteDataSource(
         retrofitStorage: RetrofitStorage
     ) : RemoteDataSource
+
+    @Binds
+    abstract fun bindLocalDataSource(
+        roomStorage: RoomStorage
+    ) : LocalDataSource
 }
