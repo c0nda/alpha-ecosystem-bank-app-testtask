@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.listener.bankapp.di.searchscreen.SearchScreenComponent
+import com.listener.bankapp.DI
 import com.listener.bankapp.presentation.daggerViewModel
 import com.listener.bankapp.presentation.searchscreen.SearchScreenViewModel
 import com.listener.bankapp.presentation.searchscreen.layout.SearchScreen
@@ -15,11 +15,13 @@ fun BinNavHost(
 ) {
     NavHost(navController = navController, startDestination = Routes.SearchScreen.route) {
         composable(route = Routes.SearchScreen.route) {
-            val searchScreenComponent by lazy { SearchScreenComponent.create() }
             val searchScreenViewModel = daggerViewModel {
-                searchScreenComponent.viewModelFactory().create(SearchScreenViewModel::class.java)
+                DI.appComponent.viewModelFactory().create(SearchScreenViewModel::class.java)
             }
             SearchScreen(searchScreenViewModel = searchScreenViewModel)
+        }
+        composable(route = Routes.RequestHistoryScreen.route) {
+
         }
     }
 }
