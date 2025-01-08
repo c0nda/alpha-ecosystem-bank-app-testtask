@@ -26,11 +26,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.listener.bankapp.R
 import com.listener.bankapp.domain.models.BankCard
+import com.listener.bankapp.presentation.item.RequestErrorItem
+import com.listener.bankapp.presentation.item.RequestItem
 import com.listener.bankapp.presentation.searchscreen.SearchScreenViewModel
 import com.listener.bankapp.utils.Request
 
@@ -48,7 +49,7 @@ fun SearchScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(color = Color.White)
-            .padding(start = 8.dp, end = 8.dp)
+            .padding(start = 12.dp, end = 12.dp)
     ) {
         OutlinedTextField(
             value = bin,
@@ -75,7 +76,7 @@ fun SearchScreen(
         )
 
         TextButton(
-            modifier = Modifier.padding(top = 5.dp),
+            modifier = Modifier.padding(top = 5.dp, bottom = 8.dp),
             onClick = {
                 if (bin.length >= 6) {
                     searchScreenViewModel.getBankCardInfoByBin(bin.toLong())
@@ -98,7 +99,7 @@ fun SearchScreen(
 
         when (bankCardInfo.value) {
             is Request.Success -> {
-
+                RequestItem(bankCardInfo = bankCardInfo)
             }
 
             is Request.Loading -> {
@@ -112,7 +113,7 @@ fun SearchScreen(
                     "request_error",
                     errorText
                 )
-                Text(text = "${stringResource(id = R.string.error)}: $errorText")
+                RequestErrorItem(errorText = errorText)
             }
         }
     }
