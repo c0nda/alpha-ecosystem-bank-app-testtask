@@ -1,4 +1,4 @@
-package com.listener.bankapp.di.searchscreen
+package com.listener.bankapp.di.app
 
 import androidx.lifecycle.ViewModel
 import com.listener.bankapp.di.viewmodel.ViewModelKey
@@ -8,7 +8,7 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 
 @Module
-abstract class SearchScreenModule {
+abstract class ViewModelModule {
 
     @Binds
     @IntoMap
