@@ -1,6 +1,6 @@
 # Bank app
 
-Android app for searching information about bank cards with its BIN number.
+Android app for searching information about bank cards with its BIN number. Done according to test task from Alpha Ecosystem.
 
 ## Tech stack
 
