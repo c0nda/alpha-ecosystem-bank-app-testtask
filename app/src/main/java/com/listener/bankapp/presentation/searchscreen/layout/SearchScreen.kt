@@ -3,6 +3,7 @@ package com.listener.bankapp.presentation.searchscreen.layout
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -25,25 +26,33 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.listener.bankapp.R
 import com.listener.bankapp.domain.models.BankCard
 import com.listener.bankapp.presentation.item.RequestErrorItem
-import com.listener.bankapp.presentation.item.RequestItem
+import com.listener.bankapp.presentation.item.RequestSuccessItem
+import com.listener.bankapp.presentation.navigation.Routes
 import com.listener.bankapp.presentation.searchscreen.SearchScreenViewModel
 import com.listener.bankapp.utils.Request
 
 @Composable
 fun SearchScreen(
-    searchScreenViewModel: SearchScreenViewModel
+    searchScreenViewModel: SearchScreenViewModel,
+    navController: NavHostController
 ) {
     var bin by rememberSaveable {
         mutableStateOf("")
     }
 
     val bankCardInfo = searchScreenViewModel.bankCardInfo.collectAsState()
+
+    var isFindButtonEnabled by rememberSaveable {
+        mutableStateOf(true)
+    }
 
     Column(
         modifier = Modifier
@@ -57,6 +66,12 @@ fun SearchScreen(
                 if (it.length <= 8 && it.matches(Regex("\\d*"))) {
                     bin = it
                 }
+            },
+            placeholder = {
+                Text(
+                    text = stringResource(id = R.string.placeholder),
+                    fontWeight = FontWeight.Light
+                )
             },
             shape = RoundedCornerShape(20.dp),
             modifier = Modifier
@@ -87,8 +102,9 @@ fun SearchScreen(
                 containerColor = Color.Black,
                 contentColor = Color.White,
                 disabledContentColor = Color.White,
-                disabledContainerColor = Color.Black
-            )
+                disabledContainerColor = Color.Gray
+            ),
+            enabled = isFindButtonEnabled
         ) {
             Text(
                 text = stringResource(id = R.string.find),
@@ -99,14 +115,17 @@ fun SearchScreen(
 
         when (bankCardInfo.value) {
             is Request.Success -> {
-                RequestItem(bankCardInfo = bankCardInfo)
+                isFindButtonEnabled = true
+                RequestSuccessItem(bankCardInfo = (bankCardInfo.value as Request.Success<BankCard>).data)
             }
 
             is Request.Loading -> {
+                isFindButtonEnabled = false
                 CircularProgressIndicator()
             }
 
             is Request.Error -> {
+                isFindButtonEnabled = true
                 val errorText =
                     (bankCardInfo.value as Request.Error<BankCard>).error?.message.toString()
                 Log.e(
@@ -115,6 +134,29 @@ fun SearchScreen(
                 )
                 RequestErrorItem(errorText = errorText)
             }
+        }
+
+        Spacer(modifier = Modifier.weight(1f))
+
+        TextButton(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 55.dp),
+            onClick = {
+                navController.navigate(Routes.RequestHistoryScreen.route)
+            },
+            shape = RoundedCornerShape(20.dp),
+            colors = ButtonColors(
+                containerColor = Color.Black,
+                contentColor = Color.White,
+                disabledContentColor = Color.White,
+                disabledContainerColor = Color.Black
+            )
+        ) {
+            Text(
+                text = stringResource(id = R.string.request_history),
+                color = Color.White,
+            )
         }
     }
 }
