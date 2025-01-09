@@ -3,6 +3,7 @@ package com.listener.bankapp.data.repository
 import com.listener.bankapp.data.local.LocalDataSource
 import com.listener.bankapp.data.remote.RemoteDataSource
 import com.listener.bankapp.domain.models.BankCard
+import com.listener.bankapp.domain.models.BankCardHistory
 import com.listener.bankapp.domain.repository.BankCardRepository
 import com.listener.bankapp.utils.Request
 import kotlinx.coroutines.flow.Flow
@@ -18,5 +19,9 @@ class BankCardRepositoryImpl @Inject constructor(
         return remoteDataSource.loadBankCardInfoByBin(bin).onEach { request ->
             localDataSource.insertRequest(bin, request)
         }
+    }
+
+    override suspend fun loadRequestHistory(): List<BankCardHistory> {
+        return localDataSource.getAllRequests()
     }
 }

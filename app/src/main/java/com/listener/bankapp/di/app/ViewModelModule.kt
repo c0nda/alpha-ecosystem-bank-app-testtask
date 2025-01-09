@@ -2,6 +2,7 @@ package com.listener.bankapp.di.app
 
 import androidx.lifecycle.ViewModel
 import com.listener.bankapp.di.viewmodel.ViewModelKey
+import com.listener.bankapp.presentation.requesthistotyscreen.RequestHistoryViewModel
 import com.listener.bankapp.presentation.searchscreen.SearchScreenViewModel
 import dagger.Binds
 import dagger.Module
@@ -13,5 +14,10 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(SearchScreenViewModel::class)
-    abstract fun searchScreenViewModel(viewModel: SearchScreenViewModel): ViewModel
+    abstract fun bindSearchScreenViewModel(viewModel: SearchScreenViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RequestHistoryViewModel::class)
+    abstract fun bindRequestHistoryViewModel(viewModel: RequestHistoryViewModel): ViewModel
 }

@@ -6,6 +6,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.listener.bankapp.DI
 import com.listener.bankapp.presentation.daggerViewModel
+import com.listener.bankapp.presentation.requesthistotyscreen.RequestHistoryViewModel
+import com.listener.bankapp.presentation.requesthistotyscreen.layout.RequestHistoryScreen
 import com.listener.bankapp.presentation.searchscreen.SearchScreenViewModel
 import com.listener.bankapp.presentation.searchscreen.layout.SearchScreen
 
@@ -18,10 +20,19 @@ fun BinNavHost(
             val searchScreenViewModel = daggerViewModel {
                 DI.appComponent.viewModelFactory().create(SearchScreenViewModel::class.java)
             }
-            SearchScreen(searchScreenViewModel = searchScreenViewModel)
+            SearchScreen(
+                searchScreenViewModel = searchScreenViewModel,
+                navController = navController
+            )
         }
         composable(route = Routes.RequestHistoryScreen.route) {
-
+            val requestHistoryViewModel = daggerViewModel {
+                DI.appComponent.viewModelFactory().create(RequestHistoryViewModel::class.java)
+            }
+            RequestHistoryScreen(
+                requestHistoryViewModel = requestHistoryViewModel,
+                navController = navController
+            )
         }
     }
 }
