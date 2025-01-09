@@ -16,4 +16,6 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="blank">-</string>
+    <string name="request_history">Request history</string>
+    <string name="placeholder">Enter the first 6 to 8 digits of a card number (BIN/IIN)</string>
 </resources>
