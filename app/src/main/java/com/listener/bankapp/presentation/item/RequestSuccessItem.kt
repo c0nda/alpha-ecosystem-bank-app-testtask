@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -15,12 +14,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.listener.bankapp.R
 import com.listener.bankapp.domain.models.BankCard
-import com.listener.bankapp.utils.Request
 
 @Composable
-fun RequestItem(
-    modifier: Modifier = Modifier,
-    bankCardInfo: State<Request<BankCard>>
+fun RequestSuccessItem(
+    bankCardInfo: BankCard
 ) {
     Row {
         Column {
@@ -29,7 +26,7 @@ fun RequestItem(
                 fontWeight = FontWeight.Light
             )
             Text(
-                text = (bankCardInfo.value as Request.Success<BankCard>).data.scheme
+                text = bankCardInfo.scheme
                     ?: stringResource(id = R.string.blank)
             )
 
@@ -40,7 +37,7 @@ fun RequestItem(
                 fontWeight = FontWeight.Light
             )
             Text(
-                text = (bankCardInfo.value as Request.Success<BankCard>).data.brand
+                text = bankCardInfo.brand
                     ?: stringResource(id = R.string.blank)
             )
 
@@ -59,8 +56,7 @@ fun RequestItem(
                         fontSize = 12.sp
                     )
                     Text(
-                        text = ((bankCardInfo.value as Request.Success<BankCard>)
-                            .data.number?.length
+                        text = (bankCardInfo.number?.length
                             ?: stringResource(id = R.string.blank)).toString()
                     )
                 }
@@ -74,8 +70,7 @@ fun RequestItem(
                         fontSize = 12.sp
                     )
                     Text(
-                        text = ((bankCardInfo.value as Request.Success<BankCard>)
-                            .data.number?.luhn
+                        text = (bankCardInfo.number?.luhn
                             ?: stringResource(id = R.string.blank)).toString()
                     )
                 }
@@ -89,21 +84,17 @@ fun RequestItem(
             )
             Row {
                 Text(
-                    text = ((bankCardInfo.value as Request.Success<BankCard>).data.bank?.name
-                        ?: stringResource(id = R.string.blank)) + ", "
+                    text = (bankCardInfo.bank?.name ?: stringResource(id = R.string.blank)) + ", "
                 )
                 Text(
-                    text = (bankCardInfo.value as Request.Success<BankCard>).data.bank?.city
-                        ?: stringResource(id = R.string.blank)
+                    text = bankCardInfo.bank?.city ?: stringResource(id = R.string.blank)
                 )
             }
             Text(
-                text = (bankCardInfo.value as Request.Success<BankCard>).data.bank?.url
-                    ?: stringResource(id = R.string.blank)
+                text = bankCardInfo.bank?.url ?: stringResource(id = R.string.blank)
             )
             Text(
-                text = (bankCardInfo.value as Request.Success<BankCard>).data.bank?.phone
-                    ?: stringResource(id = R.string.blank)
+                text = bankCardInfo.bank?.phone ?: stringResource(id = R.string.blank)
             )
         }
 
@@ -115,8 +106,7 @@ fun RequestItem(
                 fontWeight = FontWeight.Light
             )
             Text(
-                text = (bankCardInfo.value as Request.Success<BankCard>).data.type
-                    ?: stringResource(id = R.string.blank)
+                text = bankCardInfo.type ?: stringResource(id = R.string.blank)
             )
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -126,8 +116,8 @@ fun RequestItem(
                 fontWeight = FontWeight.Light
             )
             Text(
-                text = if ((bankCardInfo.value as Request.Success<BankCard>).data.prepaid != null) {
-                    if ((bankCardInfo.value as Request.Success<BankCard>).data.prepaid == true) {
+                text = if (bankCardInfo.prepaid != null) {
+                    if (bankCardInfo.prepaid == true) {
                         stringResource(id = R.string.yes)
                     } else {
                         stringResource(id = R.string.no)
@@ -145,15 +135,13 @@ fun RequestItem(
             )
             Row {
                 Text(
-                    text = (bankCardInfo.value as Request.Success<BankCard>).data.country?.emoji
-                        ?: stringResource(id = R.string.blank)
+                    text = bankCardInfo.country?.emoji ?: stringResource(id = R.string.blank)
                 )
 
                 Spacer(modifier = Modifier.width(4.dp))
 
                 Text(
-                    text = (bankCardInfo.value as Request.Success<BankCard>).data.country?.name
-                        ?: stringResource(id = R.string.blank)
+                    text = bankCardInfo.country?.name ?: stringResource(id = R.string.blank)
                 )
             }
             Row {
@@ -162,15 +150,17 @@ fun RequestItem(
                     fontWeight = FontWeight.Light
                 )
                 Text(
-                    text = ((bankCardInfo.value as Request.Success<BankCard>).data.country?.latitude
-                        ?: stringResource(id = R.string.blank)).toString()
+                    text = (bankCardInfo.country?.latitude
+                        ?: stringResource(id = R.string.blank)).toString() + ","
                 )
+            }
+            Row {
                 Text(
-                    text = ", " + stringResource(id = R.string.longitude) + ": ",
+                    text = stringResource(id = R.string.longitude) + ": ",
                     fontWeight = FontWeight.Light
                 )
                 Text(
-                    text = ((bankCardInfo.value as Request.Success<BankCard>).data.country?.longitude
+                    text = (bankCardInfo.country?.longitude
                         ?: stringResource(id = R.string.blank)).toString() + ")"
                 )
             }
